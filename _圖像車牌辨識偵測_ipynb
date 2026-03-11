@@ -1,0 +1,362 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/cary0304/-1/blob/main/_%E5%9C%96%E5%83%8F%E8%BB%8A%E7%89%8C%E8%BE%A8%E8%AD%98%E5%81%B5%E6%B8%AC_ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "GMYSETbCrG4F",
+        "outputId": "d85fbc5c-796c-413c-8755-62e779a66d39"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting pytesseract\n",
+            "  Downloading pytesseract-0.3.13-py3-none-any.whl.metadata (11 kB)\n",
+            "Requirement already satisfied: packaging>=21.3 in /usr/local/lib/python3.12/dist-packages (from pytesseract) (26.0)\n",
+            "Requirement already satisfied: Pillow>=8.0.0 in /usr/local/lib/python3.12/dist-packages (from pytesseract) (11.3.0)\n",
+            "Downloading pytesseract-0.3.13-py3-none-any.whl (14 kB)\n",
+            "Installing collected packages: pytesseract\n",
+            "Successfully installed pytesseract-0.3.13\n"
+          ]
+        }
+      ],
+      "source": [
+        "! pip install pytesseract"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "CuXS2c4urG4K",
+        "outputId": "6c5cf18e-971e-4ce8-a685-a9d925e1f62c"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Collecting contours\n",
+            "  Downloading contours-0.0.2.tar.gz (7.4 kB)\n",
+            "  Preparing metadata (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "Requirement already satisfied: numpy>=1.4.0 in /usr/local/lib/python3.12/dist-packages (from contours) (2.0.2)\n",
+            "Requirement already satisfied: matplotlib>=1.5.0 in /usr/local/lib/python3.12/dist-packages (from contours) (3.10.0)\n",
+            "Requirement already satisfied: future in /usr/local/lib/python3.12/dist-packages (from contours) (1.0.0)\n",
+            "Requirement already satisfied: contourpy>=1.0.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=1.5.0->contours) (1.3.3)\n",
+            "Requirement already satisfied: cycler>=0.10 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=1.5.0->contours) (0.12.1)\n",
+            "Requirement already satisfied: fonttools>=4.22.0 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=1.5.0->contours) (4.61.1)\n",
+            "Requirement already satisfied: kiwisolver>=1.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=1.5.0->contours) (1.4.9)\n",
+            "Requirement already satisfied: packaging>=20.0 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=1.5.0->contours) (26.0)\n",
+            "Requirement already satisfied: pillow>=8 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=1.5.0->contours) (11.3.0)\n",
+            "Requirement already satisfied: pyparsing>=2.3.1 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=1.5.0->contours) (3.3.2)\n",
+            "Requirement already satisfied: python-dateutil>=2.7 in /usr/local/lib/python3.12/dist-packages (from matplotlib>=1.5.0->contours) (2.9.0.post0)\n",
+            "Requirement already satisfied: six>=1.5 in /usr/local/lib/python3.12/dist-packages (from python-dateutil>=2.7->matplotlib>=1.5.0->contours) (1.17.0)\n",
+            "Building wheels for collected packages: contours\n",
+            "  Building wheel for contours (setup.py) ... \u001b[?25l\u001b[?25hdone\n",
+            "  Created wheel for contours: filename=contours-0.0.2-py3-none-any.whl size=8517 sha256=227ec74b5631ab3a1cb903622f6542cd047f3f2762fe51f7a1993fdc74f39dd3\n",
+            "  Stored in directory: /root/.cache/pip/wheels/d8/d2/6b/0a6a121684fd51a6e237db9f5bbe225af086375734baa3c01c\n",
+            "Successfully built contours\n",
+            "Installing collected packages: contours\n",
+            "Successfully installed contours-0.0.2\n"
+          ]
+        }
+      ],
+      "source": [
+        "! pip install contours"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "buCAWuqmrG4L",
+        "outputId": "5027edea-120f-4635-9c00-3935754f71ec"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Requirement already satisfied: pytesseract in /usr/local/lib/python3.12/dist-packages (0.3.13)\n",
+            "Requirement already satisfied: packaging>=21.3 in /usr/local/lib/python3.12/dist-packages (from pytesseract) (26.0)\n",
+            "Requirement already satisfied: Pillow>=8.0.0 in /usr/local/lib/python3.12/dist-packages (from pytesseract) (11.3.0)\n"
+          ]
+        }
+      ],
+      "source": [
+        "! pip install pytesseract"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "KhkUgv-UrG4L",
+        "outputId": "cbb54d90-ecc1-4aea-e25d-5260ba118aa6"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Requirement already satisfied: imutils in /usr/local/lib/python3.12/dist-packages (0.5.4)\n"
+          ]
+        }
+      ],
+      "source": [
+        "! pip install imutils"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "ACSjGDtyrG4M"
+      },
+      "outputs": [],
+      "source": [
+        "import cv2\n",
+        "import imutils\n",
+        "import numpy as np\n",
+        "import pytesseract\n",
+        "from PIL import Image"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 297
+        },
+        "id": "IQhf75HyrG4M",
+        "outputId": "56645728-f03c-4aeb-ab76-4a5811de30bf"
+      },
+      "outputs": [
+        {
+          "output_type": "error",
+          "ename": "AttributeError",
+          "evalue": "'NoneType' object has no attribute 'shape'",
+          "traceback": [
+            "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+            "\u001b[0;31mAttributeError\u001b[0m                            Traceback (most recent call last)",
+            "\u001b[0;32m/tmp/ipykernel_303/481393048.py\u001b[0m in \u001b[0;36m<cell line: 0>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      2\u001b[0m \u001b[0mimg\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mcv2\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mimread\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m'd:/picture/car12.jpg'\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0mcv2\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mIMREAD_COLOR\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m      3\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 4\u001b[0;31m \u001b[0mimg\u001b[0m\u001b[0;34m=\u001b[0m \u001b[0mimutils\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mresize\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mimg\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mwidth\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;36m500\u001b[0m \u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+            "\u001b[0;32m/usr/local/lib/python3.12/dist-packages/imutils/convenience.py\u001b[0m in \u001b[0;36mresize\u001b[0;34m(image, width, height, inter)\u001b[0m\n\u001b[1;32m     67\u001b[0m     \u001b[0;31m# grab the image size\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     68\u001b[0m     \u001b[0mdim\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;32mNone\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m---> 69\u001b[0;31m     \u001b[0;34m(\u001b[0m\u001b[0mh\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mw\u001b[0m\u001b[0;34m)\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mimage\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mshape\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;36m2\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m     70\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m     71\u001b[0m     \u001b[0;31m# if both the width and height are None, then return the\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+            "\u001b[0;31mAttributeError\u001b[0m: 'NoneType' object has no attribute 'shape'"
+          ]
+        }
+      ],
+      "source": [
+        "# The original path 'd:/picture/car12.jpg' is a local path and not accessible in Colab.\n",
+        "# Please upload your 'car12.jpg' file to the Colab environment (e.g., by clicking the folder icon on the left, then the upload icon, or using code like 'from google.colab import files; uploaded = files.upload()').\n",
+        "# Once uploaded, the file will typically be in the '/content/' directory. Then, update the image path accordingly.\n",
+        "\n",
+        "# The following line sets a Tesseract command path which is specific to Windows and will not work in Colab.\n",
+        "# In Colab, Tesseract usually needs to be installed via `!sudo apt install tesseract-ocr` and then pytesseract will often find it automatically.\n",
+        "# We will comment it out for now as it's not the cause of the current error.\n",
+        "# pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'\n",
+        "\n",
+        "# Assuming 'car12.jpg' is uploaded to the root of your Colab session (e.g., /content/car12.jpg)\n",
+        "img = cv2.imread('car12.jpg', cv2.IMREAD_COLOR)\n",
+        "\n",
+        "if img is None:\n",
+        "    print(\"Error: Could not load image. Please ensure 'car12.jpg' is uploaded to the Colab environment and the path in cv2.imread is correct.\")\n",
+        "else:\n",
+        "    img = imutils.resize(img, width=500)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "HvHJg7m1rG4N"
+      },
+      "outputs": [],
+      "source": [
+        "gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)      #convert to grey scale\n",
+        "gray = cv2.bilateralFilter(gray, 11, 17, 17)      #Blur to reduce noise\n",
+        "kernel_size = 3\n",
+        "blur_gray = cv2.GaussianBlur(gray,(kernel_size, kernel_size), 0)\n",
+        "edged = cv2.Canny(blur_gray, 20, 120)                  #Perform Edge detection"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "6tbKwGpBrG4N",
+        "outputId": "c7eab576-1c24-4ce3-c7c6-4c290c53f19f"
+      },
+      "outputs": [
+        {
+          "data": {
+            "text/plain": [
+              "-1"
+            ]
+          },
+          "execution_count": 5,
+          "metadata": {},
+          "output_type": "execute_result"
+        }
+      ],
+      "source": [
+        "# find contours from the edged image and keep only the largest\n",
+        "# ones, and initialize our screen contour\n",
+        "\n",
+        "cnts,new = cv2.findContours(edged.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)\n",
+        "img1=img.copy()\n",
+        "cv2.drawContours(img1,cnts,-1,(0,255,0), 2)\n",
+        "cv2.imshow(\"img1\",img1)\n",
+        "cv2.waitKey(0)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "CaeBNVanrG4O"
+      },
+      "outputs": [],
+      "source": [
+        "#sorts contours based on minimum area 30 and ignores the ones below that\n",
+        "\n",
+        "cnts = sorted(cnts, key = cv2.contourArea, reverse = True)[:30]\n",
+        "screenCnt = None                              #will store the number plate contour\n",
+        "img2 = img.copy()\n",
+        "cv2.drawContours(img2,cnts,-1,(0,255,0),2)\n",
+        "cv2.imshow(\"img2\",img2)                       #top 30 contours\n",
+        "cv2.waitKey(0)\n",
+        "count=0"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "7261NeBHrG4O"
+      },
+      "outputs": [],
+      "source": [
+        "idx=7\n",
+        "\n",
+        "# loop over contours\n",
+        "for c in cnts:\n",
+        "  # approximate the contour\n",
+        "    peri = cv2.arcLength(c, True)\n",
+        "    approx = cv2.approxPolyDP(c, 0.018 * peri, True)\n",
+        "    if len(approx) == 4:                                #chooses contours with 4 corners\n",
+        "        screenCnt = approx\n",
+        "        x,y,w,h = cv2.boundingRect(c)               #finds co-ordinates of the plate\n",
+        "        new_img=img[y:y+h,x:x+w]\n",
+        "        cv2.imwrite('./'+str(idx)+'.png',new_img)   #stores the new image\n",
+        "        idx+=1\n",
+        "        break"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "0CymruH3rG4O",
+        "outputId": "60220386-2e53-46c9-9b88-97b67e15c78c"
+      },
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "Number is:  HR 26 DA 2330\n",
+            "\f",
+            "\n"
+          ]
+        }
+      ],
+      "source": [
+        "#draws the selected contour on original image\n",
+        "\n",
+        "cv2.drawContours(img, [screenCnt], -1, (0, 255, 0), 1)\n",
+        "cv2.imshow(\"Final image with plate detected\",img)\n",
+        "cv2.waitKey(0)\n",
+        "Cropped_loc='./7.png'                                      #the filename of cropped image\n",
+        "cv2.imshow(\"cropped \",cv2.imread(Cropped_loc))\n",
+        "text=pytesseract.image_to_string(Cropped_loc,lang='eng')   #converts image characters to string\n",
+        "print(\"Number is: \" , text)\n",
+        "\n",
+        "cv2.waitKey(0)\n",
+        "cv2.destroyAllWindows()"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "GDZTa37wrG4P"
+      },
+      "outputs": [],
+      "source": [
+        "# 按 enter 會出現車牌辨識"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "5APgsbBlrG4P"
+      },
+      "outputs": [],
+      "source": [
+        "# https://www.codespeedy.com/license-plate-recognition-using-opencv-in-python/"
+      ]
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "3.8.5"
+    },
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
